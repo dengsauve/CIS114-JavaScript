@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    create_markup();
+
     var btnTop = $('#back-to-top');
     scrollHundred();
 
@@ -23,3 +25,38 @@ $(document).ready(function() {
         }
     }
 });
+
+function create_markup(){
+    $('.col_expand').each(function(){
+        var link_text = $(this).attr('data-link-text');
+        var content = $(this).html();
+
+        $(this).html('<div class="expanding_col_container" style="height: 0px;"><div class="expanding_col_content">' + content + '</div></div>');
+
+        $(this).append('<div class="expanding_col_link">' + link_text + "</div>"); 
+    });
+
+    activate_col();
+}
+
+function activate_col(){
+    $('.col_expand .expanding_col_link').on('click', function() {
+        var new_height = null;
+        var selected_col = $(this).closest('.col_expand');
+        var selected_content = selected_col.find('.expanding_col_container');
+
+        selected_col.toggleClass('open');
+
+        if(selected_col.hasClass('open')){
+            new_height = selected_col.find('.expanding_col_content').outerHeight(true);
+        }else{
+            new_height = 0;
+        }
+
+        selected_content.animate({'height': new_height + 'px'}, 1000, function() {
+            if(new_height != 0){
+                $(this).removeAttr('style'); 
+            }
+        });
+    });
+}

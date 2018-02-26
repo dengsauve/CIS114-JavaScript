@@ -8,7 +8,35 @@ body{ font-family: Arial; color: #333; }
     display: none;
     z-index: 9;
 }
-
+/*
 .col_expand{
     display: none;
+}
+*/
+
+.col_expand .expanding_col_link{
+    color: #00A5D5;
+    font-weight: 600;
+}
+
+.col_expand expanding_col_link:hover{
+    color: #555;
+    cursor: pointer;
+}
+
+.col_expand .expanding_col_link::before{
+    content: '     \002b';
+    padding-right: 5px;
+}
+
+.col_expand .expanding_col_container{
+    overflow: hidden;
+}
+
+.expanding_col .expanding_col_content{
+    padding: 1px 0px;
+}
+
+.col_expand.open .expanding_col_link::before{
+    content: '     \2013'; 
 }
